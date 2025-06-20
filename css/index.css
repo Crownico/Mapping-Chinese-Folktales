@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color: #edc995;
+    --bg-primary-color: #fff7e8;
+    --text-color: #2b2b2b;
+    --header-color: #262626;
+    --primary-color-100: #fbf4ea;
+    --primary-color-200: #f8e9d5;
+    --primary-color-300: #f4dfbf;
+    --primary-color-400: #f1d4aa;
+    --primary-color-500: #edc995;
+    --primary-color-600: #bea177;
+    --primary-color-700: #8e7959;
+    --primary-color-800: #5f503c;
+    --primary-color-900: #2f281e;
+}
+body {
+    font-family: 'Noto Serif SC', serif;
+    background-color: var(--bg-primary-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+header {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/40/Getsuya_Sansui_by_Hashimoto_Gah%C5%8D.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 3rem 2rem;
+    color: white;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--header-color);
+    display: flex;
+    justify-content: center;
+    /* gap: 2rem; */
+    flex-wrap: wrap;
+    z-index: 99999;
+}
+nav a {
+    padding: 1rem;
+    color: var(--primary-color-200);
+
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+nav a:hover {
+    background-color: rgba(255, 230, 180, 0.6);
+    text-shadow: 0 0 6px rgba(255, 230, 180, 0.6);
+    color: #fff;
+}
+
+.active {
+    text-shadow: 0 0 6px rgba(255, 230, 180, 0.6);
+    color: var(--primary-color);
+}
+
+footer {
+    background-color: var(--header-color);
+    color: #ccc;
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+    .why-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    .why-img img {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+.header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    position: relative;
+}
+
+.main-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+.subtitle {
+    font-size: 18px;
+    font-style: italic;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}

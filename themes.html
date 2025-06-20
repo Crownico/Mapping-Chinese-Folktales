@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mapping Chinese Folktales</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap"
+            rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
+        <link rel="stylesheet" href="css/index.css" />
+        <link rel="stylesheet" href="css/theme.css" />
+    </head>
+
+    <body>
+        <header>
+            <h1>Mapping Chinese Folktales</h1>
+            <p>A digital journey through regional tales, themes, and cultural identities.</p>
+        </header>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="regions.html">Regions</a>
+            <a class="active" href="themes.html">Themes</a>
+            <a href="stories.html">Landmark Tales</a>
+            <a href="about.html">About</a>
+        </nav>
+
+        <main>
+            <div class="header text-center">
+                <h1 class="main-title">The story is multifaceted</h1>
+                <p class="subtitle">Explore the rich connotation and profound heritage of Chinese folk culture</p>
+            </div>
+
+            <div class="chart-section">
+                <div class="chart-container">
+                    
+                    <div class="chart-wrapper">
+                        <canvas id="storyChart" class="chart-canvas"></canvas>
+                    </div>
+                    <div class="chart-header" style="margin-top: 40px;">
+                        <h2 class="chart-title">Distribution of folklore types</h2>
+                        <p class="chart-subtitle">Based on statistical analysis of traditional literature</p>
+                    </div>
+                </div>
+            </div>
+            <div class="story-types-grid">
+                <div class="story-type-card myth">
+                    <div class="card-header">
+                        <div class="type-info">
+                            <div class="type-icon myth">神</div>
+                            <div class="type-name-section">
+                                <h3>Mythological Stories</h3>
+                                <span class="type-category">Genesis: Origin</span>
+                            </div>
+                        </div>
+                        <div class="percentage-badge">35%</div>
+                    </div>
+
+                    <p class="card-description">
+                        Stories about the origin of the universe, humanity, and nature, carrying the philosophical
+                        reflections of ancestors on the world's beginnings. These stories often feature grand
+                        narratives, reflecting the unique cosmology and outlook on life of the Chinese nation.
+                    </p>
+
+                    <div class="examples-section">
+                        <h4 class="examples-title">📚 Classic Masterpieces</h4>
+                        <div class="example-item">
+                            <span class="example-name">Pangu Creates the World</span>
+                            <span class="example-origin">Ancient Mythology</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-name">Nuwa Creates Humans</span>
+                            <span class="example-origin">"General Customs"</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-name">Kua Fu Chases the Sun</span>
+                            <span class="example-origin">"Classic of Mountains and Seas"</span>
+                        </div>
+                    </div>
+
+                    <div class="characteristics">
+                        <span class="characteristic-tag">Grand narrative</span>
+                        <span class="characteristic-tag">Philosophical speculation</span>
+                        <span class="characteristic-tag">Cultural roots</span>
+                    </div>
+                </div>
+
+                <div class="story-type-card legend">
+                    <div class="card-header">
+                        <div class="type-info">
+                            <div class="type-icon legend">传</div>
+                            <div class="type-name-section">
+                                <h3>Heroic Legends</h3>
+                                <span class="type-category">Heroes·Landmarks</span>
+                            </div>
+                        </div>
+                        <div class="percentage-badge">25%</div>
+                    </div>
+
+                    <p class="card-description">
+                        Legendary stories about historical figures and local landmarks, often blending real history with
+                        folk imagination. These stories highlight the Chinese nation's values of hero worship and
+                        pursuit of justice.
+                    </p>
+
+                    <div class="examples-section">
+                        <h4 class="examples-title">📚 Classic Masterpieces</h4>
+                        <div class="example-item">
+                            <span class="example-name">Lady Mengjiang Cries at the Great Wall</span>
+                            <span class="example-origin">Folk Legend</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-name">Legend of the White Snake</span>
+                            <span class="example-origin">"Stories to Caution the World"</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-name">The Cowherd and the Weaver Girl</span>
+                            <span class="example-origin">"Nineteen Ancient Poems"</span>
+                        </div>
+                    </div>
+
+                    <div class="characteristics">
+                        <span class="characteristic-tag">Historical background</span>
+                        <span class="characteristic-tag">Emotional resonance</span>
+                        <span class="characteristic-tag">Moral ideals</span>
+                    </div>
+                </div>
+
+                <div class="story-type-card fantasy">
+                    <div class="card-header">
+                        <div class="type-info">
+                            <div class="type-icon fantasy">奇</div>
+                            <div class="type-name-section">
+                                <h3>Fantasy Tales</h3>
+                                <span class="type-category">Spirits·Ghosts·Foxes</span>
+                            </div>
+                        </div>
+                        <div class="percentage-badge">20%</div>
+                    </div>
+
+                    <p class="card-description">
+                        Magical stories containing supernatural elements, reflecting people's imagination and awe of the
+                        unknown world. These stories often contain profound life philosophies and moral lessons.
+                    </p>
+
+                    <div class="examples-section">
+                        <h4 class="examples-title">📚 Classic Masterpieces</h4>
+                        <div class="example-item">
+                            <span class="example-name">Strange Tales from a Chinese Studio: The Painted Skin</span>
+                            <span class="example-origin">Pu Songling</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-name">The Legend of Ji Gong</span>
+                            <span class="example-origin">Folk Legend</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-name">Investiture of the Gods</span>
+                            <span class="example-origin">Xu Zhonglin</span>
+                        </div>
+                    </div>
+
+                    <div class="characteristics">
+                        <span class="characteristic-tag">Supernatural elements</span>
+                        <span class="characteristic-tag">Rich imagination</span>
+                        <span class="characteristic-tag">Profound meaning</span>
+                    </div>
+                </div>
+
+                <div class="story-type-card life">
+                    <div class="card-header">
+                        <div class="type-info">
+                            <div class="type-icon life">智</div>
+                            <div class="type-name-section">
+                                <h3>Life Stories</h3>
+                                <span class="type-category">Wisdom·Satire·Anecdotes</span>
+                            </div>
+                        </div>
+                        <div class="percentage-badge">15%</div>
+                    </div>
+
+                    <p class="card-description">
+                        Stories demonstrating everyday wisdom and satirizing foolishness, conveying life philosophies in
+                        a humorous way. These stories are close to people's daily lives and have strong practical
+                        significance.
+                    </p>
+
+                    <div class="examples-section">
+                        <h4 class="examples-title">📚 Classic Masterpieces</h4>
+                        <div class="example-item">
+                            <span class="example-name">Stories of Afanti</span>
+                            <span class="example-origin">Uyghur Folk Tales</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-name">Three Monks</span>
+                            <span class="example-origin">Buddhist Fable</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-name">Sima Guang Breaks the Vat</span>
+                            <span class="example-origin">Historical Anecdote</span>
+                        </div>
+                    </div>
+
+                    <div class="characteristics">
+                        <span class="characteristic-tag">Life wisdom</span>
+                        <span class="characteristic-tag">Humorous satire</span>
+                        <span class="characteristic-tag">Educational value</span>
+                    </div>
+                </div>
+
+                <div class="story-type-card moral">
+                    <div class="card-header">
+                        <div class="type-info">
+                            <div class="type-icon moral">德</div>
+                            <div class="type-name-section">
+                                <h3>Fables</h3>
+                                <span class="type-category">Moral Teachings</span>
+                            </div>
+                        </div>
+                        <div class="percentage-badge">5%</div>
+                    </div>
+
+                    <p class="card-description">
+                        Simple stories that convey moral concepts through actions or narratives, with clear educational
+                        purposes. These stories are concise yet profound, serving as important vehicles for traditional
+                        cultural education.
+                    </p>
+
+                    <div class="examples-section">
+                        <h4 class="examples-title">📚 Classic Masterpieces</h4>
+                        <div class="example-item">
+                            <span class="example-name">Marking the Boat to Find the Sword</span>
+                            <span class="example-origin">"Lüshi Chunqiu"</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-name">Waiting for a Hare by the Tree Stump</span>
+                            <span class="example-origin">"Han Feizi"</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-name">Mending the Fold After Losing Sheep</span>
+                            <span class="example-origin">"Strategies of the Warring States"</span>
+                        </div>
+                    </div>
+
+                    <div class="characteristics">
+                        <span class="characteristic-tag">Moral education</span>
+                        <span class="characteristic-tag">Concise</span>
+                        <span class="characteristic-tag">Profound philosophy</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="insights-section">
+                <h2 class="insights-title">Cultural Insights</h2>
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <div class="insight-number">5000+</div>
+                        <div class="insight-label">Years of History</div>
+                        <div class="insight-description">From oral tradition to written records</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-number">56</div>
+                        <div class="insight-label">Ethnic Groups</div>
+                        <div class="insight-description">Convergence of diverse cultures</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-number">1000+</div>
+                        <div class="insight-label">Classic Works</div>
+                        <div class="insight-description">Rich treasury of literature</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2025 Group 10 · MLIS, Universiti Malaya</p>
+            <p>
+                Designed by: ZHANG YUHANG (23115104), ZHAO YIYAO (23107345), ZHOU TIANHUI (23115431), LI KUNWEI
+                (23086384)
+            </p>
+        </footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const ctx = document.getElementById('storyChart').getContext('2d');
+
+                const chart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Mythological Stories', 'Heroic Legends', 'Fantasy Tales', 'Life Stories', 'Fables'],
+                        datasets: [
+                            {
+                                data: [35, 25, 20, 15, 5],
+                                backgroundColor: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7'],
+                                borderColor: '#ffffff',
+                                borderWidth: 3,
+                                hoverOffset: 15
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        cutout: '60%',
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: '#fff',
+                                bodyColor: '#fff',
+                                borderColor: '#ddd',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                displayColors: true,
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.label + ': ' + context.parsed + '%';
+                                    }
+                                }
+                            }
+                        },
+                        animation: {
+                            animateRotate: true,
+                            duration: 2000,
+                            easing: 'easeOutQuart'
+                        }
+                    }
+                });
+
+                // Add card hover interaction effects
+                const cards = document.querySelectorAll('.story-type-card');
+                cards.forEach((card, index) => {
+                    card.addEventListener('mouseenter', function () {
+                        chart.setActiveElements([
+                            {
+                                datasetIndex: 0,
+                                index: index
+                            }
+                        ]);
+                        chart.update('none');
+                    });
+
+                    card.addEventListener('mouseleave', function () {
+                        chart.setActiveElements([]);
+                        chart.update('none');
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

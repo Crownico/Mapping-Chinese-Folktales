@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mapping Chinese Folktales</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap"
+            rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
+        <link rel="stylesheet" href="css/index.css" />
+        <link rel="stylesheet" href="css/about.css" />
+    </head>
+
+    <body>
+        <header>
+            <h1>Mapping Chinese Folktales</h1>
+            <p>A digital journey through regional tales, themes, and cultural identities.</p>
+        </header>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="regions.html">Regions</a>
+            <a href="themes.html">Themes</a>
+            <a href="stories.html">Landmark Tales</a>
+            <a class="active" href="about.html">About</a>
+        </nav>
+
+        <div class="header">
+            <h1>ABOUT</h1>
+        </div>
+
+        <main>
+            <section>
+                <h2>Project Background</h2>
+                <p>
+                    This project aims to present the geographical distribution, thematic classification and cultural
+                    connotation of Chinese folk tales in a digital humanistic way. Through the collation and digital
+                    expression of classic legends and regional characteristic stories, we hope to reconstruct the
+                    transmission path of China's oral tradition in the digital space and promote the visual inheritance
+                    of culture.
+                </p>
+            </section>
+
+            <section>
+                <h2>Design Concept</h2>
+                <p>
+                    The overall page takes "ancient rhyme and new presentation" as the aesthetic core, integrating ink
+                    elements and modern responsive design language. Through map visualization, interactive timelines,
+                    and topic card classification, we encourage users to interpret the social value, emotional
+                    projection, and cultural identity behind the story from different perspectives.
+                </p>
+            </section>
+
+            <section>
+                <h2>Team involvement</h2>
+                <p>
+                    We developed a visualization to show how engaged and how much time each team member is involved in
+                    the task. Charts will help to review everyone's efforts with the overall collaborative process of
+                    the project.
+                </p>
+                <canvas
+                    id="contributionChart"
+                    width="700"
+                    height="400"
+                    style="max-width: 100%; margin: 30px auto; display: block"></canvas>
+            </section>
+
+            <section>
+                <h2>Page navigation</h2>
+                <div class="nav-links">
+                    <a href="index.html">🏠 Home</a>
+                    <a href="regions.html">🗺️ Regions</a>
+                    <a href="themes.html">📚 Themes</a>
+                    <a href="landmark-tales.html">🌟 Landmark Tales</a>
+                </div>
+            </section>
+
+            <section>
+                <h2>Acknowledgments and Statements</h2>
+                <p>
+                    This project is the result of the team effort of the University of Malaya's Postgraduate Programme
+                    in Library and Information Science, Introduction to Digital Humanities, and all photographs and
+                    texts are for learning and presentation purposes. If there is any infringement, please contact us to
+                    remove it. Special thanks to the instructors and supporters of the materials for their valuable
+                    guidance and assistance.
+                </p>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2025 Group 10 · MLIS, Universiti Malaya</p>
+            <p>
+                Designed by: ZHANG YUHANG (23115104), ZHAO YIYAO (23107345), ZHOU TIANHUI (23115431), LI KUNWEI
+                (23086384)
+            </p>
+        </footer>
+        <script>
+            const ctx = document.getElementById('contributionChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['ZHANG YUHANG', 'ZHAO YIYAO', 'ZHOU TIANHUI', 'LI KUNWEI'],
+                    datasets: [
+                        {
+                            label: '参与时间（小时）',
+                            data: [12, 10, 8, 15],
+                            backgroundColor: ['#b85732', '#d5895a', '#f3c179', '#7b4c3a'],
+                            borderRadius: 8
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.parsed.y + ' 小时';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '时间（小时）'
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

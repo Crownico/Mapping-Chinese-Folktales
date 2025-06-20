@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>故事的千面百态 - 中华民俗文化探索</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: #fafbfc;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="pattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23pattern)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-weight: 400;
+            position: relative;
+            z-index: 2;
+        }
+
+        .content-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            margin-bottom: 80px;
+            align-items: start;
+        }
+
+        .chart-section {
+            position: sticky;
+            top: 40px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e8ecef;
+        }
+
+        .chart-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .chart-subtitle {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        .chart-type-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .chart-selector {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            color: #495057;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chart-selector:hover {
+            background: #e9ecef;
+        }
+
+        .chart-selector.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .chart-wrapper {
+            width: 100%;
+            height: 350px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chart-canvas {
+            max-width: 300px;
+            max-height: 300px;
+        }
+
+        .details-section {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .story-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .story-type-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e8ecef;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-type-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .story-type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .story-type-card:hover::before {
+            width: 8px;
+        }
+
+        .story-type-card.myth::before { background: #FF6B6B; }
+        .story-type-card.legend::before { background: #4ECDC4; }
+        .story-type-card.fantasy::before { background: #45B7D1; }
+        .story-type-card.life::before { background: #96CEB4; }
+        .story-type-card.moral::before { background: #FFEAA7; }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .type-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .type-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .type-icon.myth { background: linear-gradient(135deg, #FF6B6B, #FF5252); }
+        .type-icon.legend { background: linear-gradient(135deg, #4ECDC4, #26C6DA); }
+        .type-icon.fantasy { background: linear-gradient(135deg, #45B7D1, #2196F3); }
+        .type-icon.life { background: linear-gradient(135deg, #96CEB4, #66BB6A); }
+        .type-icon.moral { background: linear-gradient(135deg, #FFEAA7, #FFCA28); }
+
+        .type-name-section h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .type-category {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .percentage-badge {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #495057;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .card-description {
+            color: #5a6c7d;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .examples-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .examples-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .example-item:last-child {
+            border-bottom: none;
+        }
+
+        .example-name {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .example-origin {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+
+        .characteristics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .characteristic-tag {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .insights-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 60px;
+        }
+
+        .insights-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .insight-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .insight-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .insight-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .insight-description {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1200px) {
+            .content-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .chart-section {
+                position: static;
+            }
+
+            .story-types-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .story-types-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">故事的千面百态</h1>
+            <p class="subtitle">探索中华民俗文化的丰富内涵与深厚底蕴</p>
+        </header>
+
+        <section class="content-section">
+            <div class="chart-section">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h2 class="chart-title">民俗故事类型分布</h2>
+                        <p class="chart-subtitle">基于传统文献统计分析</p>
+                    </div>
+                    
+                    <div class="chart-type-selector">
+                        <button class="chart-selector active" data-chart="doughnut">
+                            📊 环状图 (Doughnut Chart)
+                        </button>
+                    </div>
+
+                    <div class="chart-wrapper">
+                        <canvas id="storyChart" class="chart-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <div class="story-types-grid">
+                    <div class="story-type-card myth">
+                        <div class="card-header">
+                            <div class="type-info">
+                                <div class="type-icon myth">神</div>
+                                <div class="type-name-section">
+                                    <h3>神话故事</h3>
+                                    <span class="type-category">创世·起源</span>
+                                </div>
+                            </div>
+                            <div class="percentage-badge">35%</div>
+                        </div>
+                        
+                        <p class="card-description">
+                            关于宇宙、人类、自然起源的师源故事，承载着先民对世界本源的哲学思考。这些故事往往具有宏大的叙事格局，体现了中华民族独特的宇宙观和生命观。
+                        </p>
+
+                        <div class="examples-section">
+                            <h4 class="examples-title">📚 经典代表作</h4>
+                            <div class="example-item">
+                                <span class="example-name">盘古开天辟地</span>
+                                <span class="example-origin">上古神话</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-name">女娲造人</span>
+                                <span class="example-origin">《风俗通义》</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-name">夸父逐日</span>
+                                <span class="example-origin">《山海经》</span>
+                            </div>
+                        </div>
+
+                        <div class="characteristics">
+                            <span class="characteristic-tag">宏大叙事</span>
+                            <span class="characteristic-tag">哲学思辨</span>
+                            <span class="characteristic-tag">文化根源</span>
+                        </div>
+                    </div>
+
+                    <div class="story-type-card legend">
+                        <div class="card-header">
+                            <div class="type-info">
+                                <div class="type-icon legend">传</div>
+                                <div class="type-name-section">
+                                    <h3>英雄传说</h3>
+                                    <span class="type-category">英雄·风物</span>
+                                </div>
+                            </div>
+                            <div class="percentage-badge">25%</div>
+                        </div>
+                        
+                        <p class="card-description">
+                            描述历史人物、地方风物的传奇故事，往往融合了真实历史与民间想象。这些故事彰显了中华民族崇尚英雄、追求正义的价值取向。
+                        </p>
+
+                        <div class="examples-section">
+                            <h4 class="examples-title">📚 经典代表作</h4>
+                            <div class="example-item">
+                                <span class="example-name">孟姜女哭长城</span>
+                                <span class="example-origin">民间传说</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-name">白蛇传</span>
+                                <span class="example-origin">《警世通言》</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-name">牛郎织女</span>
+                                <span class="example-origin">《古诗十九首》</span>
+                            </div>
+                        </div>
+
+                        <div class="characteristics">
+                            <span class="characteristic-tag">历史背景</span>
+                            <span class="characteristic-tag">情感共鸣</span>
+                            <span class="characteristic-tag">道德理想</span>
+                        </div>
+                    </div>
+
+                    <div class="story-type-card fantasy">
+                        <div class="card-header">
+                            <div class="type-info">
+                                <div class="type-icon fantasy">奇</div>
+                                <div class="type-name-section">
+                                    <h3>奇幻故事</h3>
+                                    <span class="type-category">精怪·鬼狐</span>
+                                </div>
+                            </div>
+                            <div class="percentage-badge">20%</div>
+                        </div>
+                        
+                        <p class="card-description">
+                            含有超自然元素的神奇故事，体现了人们对未知世界的想象与敬畏。这类故事往往蕴含着深刻的人生哲理和道德教训。
+                        </p>
+
+                        <div class="examples-section">
+                            <h4 class="examples-title">📚 经典代表作</h4>
+                            <div class="example-item">
+                                <span class="example-name">聊斋志异·画皮</span>
+                                <span class="example-origin">蒲松龄</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-name">济公传</span>
+                                <span class="example-origin">民间传说</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-name">封神演义</span>
+                                <span class="example-origin">许仲琳</span>
+                            </div>
+                        </div>
+
+                        <div class="characteristics">
+                            <span class="characteristic-tag">超自然元素</span>
+                            <span class="characteristic-tag">想象丰富</span>
+                            <span class="characteristic-tag">寓意深刻</span>
+                        </div>
+                    </div>
+
+                    <div class="story-type-card life">
+                        <div class="card-header">
+                            <div class="type-info">
+                                <div class="type-icon life">智</div>
+                                <div class="type-name-section">
+                                    <h3>生活故事</h3>
+                                    <span class="type-category">智慧·讽刺·趣事</span>
+                                </div>
+                            </div>
+                            <div class="percentage-badge">15%</div>
+                        </div>
+                        
+                        <p class="card-description">
+                            庵示日常智慧、讽刺愚昧的故事，以幽默风趣的方式传递生活哲理。这类故事贴近民众生活，具有强烈的现实意义。
+                        </p>
+
+                        <div class="examples-section">
+                            <h4 class="examples-title">📚 经典代表作</h4>
+                            <div class="example-item">
+                                <span class="example-name">阿凡提的故事</span>
+                                <span class="example-origin">维吾尔族民间故事</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-name">三个和尚</span>
+                                <span class="example-origin">佛教寓言</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-name">司马光砸缸</span>
+                                <span class="example-origin">历史典故</span>
+                            </div>
+                        </div>
+
+                        <div class="characteristics">
+                            <span class="characteristic-tag">生活智慧</span>
+                            <span class="characteristic-tag">幽默讽刺</span>
+                            <span class="characteristic-tag">教育意义</span>
+                        </div>
+                    </div>
+
+                    <div class="story-type-card moral">
+                        <div class="card-header">
+                            <div class="type-info">
+                                <div class="type-icon moral">德</div>
+                                <div class="type-name-section">
+                                    <h3>寓言故事</h3>
+                                    <span class="type-category">道德说教</span>
+                                </div>
+                            </div>
+                            <div class="percentage-badge">5%</div>
+                        </div>
+                        
+                        <p class="card-description">
+                            以救人什动或故事传递道德理念的原洁故事，具有明确的教育目的。这类故事言简意赅，寓意深远，是传统文化教育的重要载体。
+                        </p>
+
+                        <div class="examples-section">
+                            <h4 class="examples-title">📚 经典代表作</h4>
+                            <div class="example-item">
+                                <span class="example-name">刻舟求剑</span>
+                                <span class="example-origin">《吕氏春秋》</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-name">守株待兔</span>
+                                <span class="example-origin">《韩非子》</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-name">亡羊补牢</span>
+                                <span class="example-origin">《战国策》</span>
+                            </div>
+                        </div>
+
+                        <div class="characteristics">
+                            <span class="characteristic-tag">道德教化</span>
+                            <span class="characteristic-tag">言简意赅</span>
+                            <span class="characteristic-tag">哲理深刻</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="insights-section">
+            <h2 class="insights-title">文化洞察</h2>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-number">5000+</div>
+                    <div class="insight-label">年历史传承</div>
+                    <div class="insight-description">从口耳相传到文字记录</div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-number">56</div>
+                    <div class="insight-label">个民族故事</div>
+                    <div class="insight-description">多元文化的交融荟萃</div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-number">1000+</div>
+                    <div class="insight-label">部经典著作</div>
+                    <div class="insight-description">丰富的文献资料宝库</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('storyChart').getContext('2d');
+            
+            const chart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['神话故事', '英雄传说', '奇幻故事', '生活故事', '寓言故事'],
+                    datasets: [{
+                        data: [35, 25, 20, 15, 5],
+                        backgroundColor: [
+                            '#FF6B6B',
+                            '#4ECDC4',
+                            '#45B7D1',
+                            '#96CEB4',
+                            '#FFEAA7'
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 3,
+                        hoverOffset: 15
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    cutout: '60%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#ddd',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.parsed + '%';
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        animateRotate: true,
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+
+            // 添加卡片悬停交互效果
+            const cards = document.querySelectorAll('.story-type-card');
+            cards.forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    chart.setActiveElements([{
+                        datasetIndex: 0,
+                        index: index
+                    }]);
+                    chart.update('none');
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    chart.setActiveElements([]);
+                    chart.update('none');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

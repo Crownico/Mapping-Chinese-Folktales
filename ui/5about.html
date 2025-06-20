@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <title>关于我们 - 中国民间故事数字项目</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            body {
+                font-family: 'Noto Serif SC', 'Microsoft YaHei', serif;
+                background: #f9f7f3;
+                color: #333;
+                line-height: 1.8;
+                margin: 0;
+            }
+
+            header {
+                background: linear-gradient(135deg, #e7d7c9 0%, #f2ede7 100%);
+                padding: 60px 20px;
+                text-align: center;
+                color: #5b3a29;
+            }
+
+            header h1 {
+                font-size: 36px;
+                margin-bottom: 10px;
+            }
+
+            header p {
+                font-size: 18px;
+                opacity: 0.8;
+            }
+
+            main {
+                max-width: 1000px;
+                margin: 40px auto;
+                padding: 0 20px;
+            }
+
+            section {
+                margin-bottom: 50px;
+            }
+
+            section h2 {
+                font-size: 28px;
+                color: #5b3a29;
+                margin-bottom: 15px;
+                border-left: 5px solid #c39b77;
+                padding-left: 12px;
+            }
+
+            section p {
+                text-align: justify;
+                color: #444;
+            }
+
+            .nav-links {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 20px;
+                margin-top: 40px;
+            }
+
+            .nav-links a {
+                text-decoration: none;
+                color: #b85732;
+                font-weight: 600;
+                font-size: 16px;
+                border-bottom: 2px solid transparent;
+                transition: all 0.3s ease;
+            }
+
+            .nav-links a:hover {
+                border-bottom: 2px solid #b85732;
+            }
+
+            footer {
+                text-align: center;
+                font-size: 14px;
+                color: #888;
+                padding: 30px 10px;
+                background-color: #f0ede8;
+                margin-top: 50px;
+            }
+
+            canvas {
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                padding: 20px;
+            }
+
+            @media (max-width: 768px) {
+                header h1 {
+                    font-size: 28px;
+                }
+
+                section h2 {
+                    font-size: 22px;
+                }
+            }
+        </style>
+
+        <!-- 引入 Chart.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>关于本项目</h1>
+            <p>Mapping Chinese Folktales · 民间故事数字人文探索计划</p>
+        </header>
+
+        <main>
+            <section>
+                <h2>项目背景</h2>
+                <p>
+                    本项目旨在以数字人文的方式呈现中国民间故事的地域分布、主题分类与文化内涵。通过对经典传说与区域特色故事的整理与数字化表达，我们希望在数字空间中重建中国口述传统的传播路径，推动文化的可视化传承。
+                </p>
+            </section>
+
+            <section>
+                <h2>设计理念</h2>
+                <p>
+                    整体页面以"古韵新呈"为美学核心，融合水墨元素与现代响应式设计语言。我们通过地图可视化、交互时间轴、主题卡片分类等方式，鼓励用户从不同角度解读故事背后的社会价值、情感投射与文化认同。
+                </p>
+            </section>
+
+            <section>
+                <h2>团队参与情况</h2>
+                <p>
+                    我们开发了一个可视化图表，用于展示各位团队成员在任务中的参与程度与时间投入。图表将帮助回顾每个人的努力与项目的整体协作过程。
+                </p>
+                <canvas
+                    id="contributionChart"
+                    width="700"
+                    height="400"
+                    style="max-width: 100%; margin: 30px auto; display: block"></canvas>
+            </section>
+
+            <section>
+                <h2>页面导航</h2>
+                <div class="nav-links">
+                    <a href="index.html">🏠 首页</a>
+                    <a href="regions.html">🗺️ 地域故事</a>
+                    <a href="themes.html">📚 主题分类</a>
+                    <a href="landmark-tales.html">🌟 经典故事赏析</a>
+                </div>
+            </section>
+
+            <section>
+                <h2>鸣谢与声明</h2>
+                <p>
+                    本项目为马来亚大学图书与信息科学研究生课程《数字人文导论》的团队成果，所有图片与文字资料均用于学习与展示之目的。如有侵权，请联系我们删除。特别鸣谢授课教师与资料支持者的宝贵指导与协助。
+                </p>
+            </section>
+        </main>
+
+        <footer>
+            © 2025 Group 10 · MLIS, Universiti Malaya | Designed with cultural respect and storytelling passion
+        </footer>
+
+        <!-- 图表配置脚本 -->
+        <script>
+            const ctx = document.getElementById('contributionChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['ZHANG YUHANG', 'ZHAO YIYAO', 'ZHOU TIANHUI', 'LI KUNWEI'],
+                    datasets: [
+                        {
+                            label: '参与时间（小时）',
+                            data: [12, 10, 8, 15],
+                            backgroundColor: ['#b85732', '#d5895a', '#f3c179', '#7b4c3a'],
+                            borderRadius: 8
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.parsed.y + ' 小时';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '时间（小时）'
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

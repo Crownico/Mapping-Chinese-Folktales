@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mapping Chinese Folktales</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap"
+            rel="stylesheet" />
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <link rel="stylesheet" href="css/index.css" />
+        <link rel="stylesheet" href="css/region.css" />
+        <style>
+            #map {
+                height: 700px;
+                width: 100%;
+            }
+
+            /* 自定义弹出框样式 */
+            .leaflet-popup-content h3 {
+                color: #2c3e50;
+                margin-top: 0;
+            }
+            .leaflet-popup-content p {
+                margin-bottom: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Mapping Chinese Folktales</h1>
+            <p>A digital journey through regional tales, themes, and cultural identities.</p>
+        </header>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a class="active" href="regions.html">Regions</a>
+            <a href="themes.html">Themes</a>
+            <a href="stories.html">Landmark Tales</a>
+            <a href="about.html">About</a>
+        </nav>
+
+        <div class="header text-center">
+            <h1 class="main-title">Every Land Has Its Tales</h1>
+            <p class="subtitle">Exploring Cultural Imprints Across China</p>
+        </div>
+        <div id="map"></div>
+
+        <div class="regions-grid container mx-auto">
+            <div class="region-card jiangnan">
+                <div class="region-header">
+                    <span class="region-icon">🌊</span>
+                    <h2 class="region-name">Water Towns of Jiangnan</h2>
+                </div>
+                <p class="region-desc">Where stone bridges span murmuring streams, cradling tender stories</p>
+
+                <div class="stories">
+                    <div class="story">
+                        <div class="story-title">"Legend of the White Snake"</div>
+                        <div class="story-desc">
+                            A millennium-spanning love between human and spirit, transcending life and death
+                            <span class="emotion-tag">【Undying Devotion】</span>
+                        </div>
+                    </div>
+                    <div class="story">
+                        <div class="story-title">"Butterfly Lovers"</div>
+                        <div class="story-desc">
+                            Tragic romance under feudal oppression, immortalized as winged spirits
+                            <span class="emotion-tag">【Eternal Companionship】</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="region-tag">
+                    <span>🏮</span>
+                    <span>Poignant romance, profound loyalty</span>
+                </div>
+            </div>
+
+            <div class="region-card xibei">
+                <div class="region-header">
+                    <span class="region-icon">🐪</span>
+                    <h2 class="region-name">Northwestern Deserts</h2>
+                </div>
+                <p class="region-desc">Silk Road caravan bells echo with heroic legends</p>
+
+                <div class="stories">
+                    <div class="story">
+                        <div class="story-title">"Zhang Qian's Western Expedition"</div>
+                        <div class="story-desc">
+                            Pioneering the Silk Road, bridging Eastern and Western civilizations
+                            <span class="emotion-tag">【Trailblazing Spirit】</span>
+                        </div>
+                    </div>
+                    <div class="story">
+                        <div class="story-title">"Dunhuang Flying Apsaras"</div>
+                        <div class="story-desc">
+                            Celestial maidens descending from cave murals, merging art with faith
+                            <span class="emotion-tag">【Sacred Majesty】</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="region-tag">
+                    <span>⚔️</span>
+                    <span>Heroic grandeur, cultural confluence</span>
+                </div>
+            </div>
+
+            <div class="region-card dongbei">
+                <div class="region-header">
+                    <span class="region-icon">🌲</span>
+                    <h2 class="region-name">Northeastern Black Soil</h2>
+                </div>
+                <p class="region-desc">Where mountain spirits mingle with mortal lives</p>
+
+                <div class="stories">
+                    <div class="story">
+                        <div class="story-title">"Shaman's Demon Conquest"</div>
+                        <div class="story-desc">
+                            Cosmic battles between spirit-mediums, embodying man-nature harmony
+                            <span class="emotion-tag">【Mystical Enigma】</span>
+                        </div>
+                    </div>
+                    <div class="story">
+                        <div class="story-title">"Legends of Three Northeastern Treasures"</div>
+                        <div class="story-desc">
+                            Ginseng spirits and fox fairies - wondrous tales from fertile lands
+                            <span class="emotion-tag">【Fantastical Wonder】</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="region-tag">
+                    <span>🌿</span>
+                    <span>Primal mysticism, nature worship</span>
+                </div>
+            </div>
+
+            <div class="region-card xinan">
+                <div class="region-header">
+                    <span class="region-icon">🏔️</span>
+                    <h2 class="region-name">Southwestern Highlands</h2>
+                </div>
+                <p class="region-desc">Where mountain ranges nurture enduring ethnic traditions</p>
+
+                <div class="stories">
+                    <div class="story">
+                        <div class="story-title">"Ashima"</div>
+                        <div class="story-desc">
+                            A Yi maiden's defiance against tyranny, petrified as guardian peak
+                            <span class="emotion-tag">【Unyielding Resistance】</span>
+                        </div>
+                    </div>
+                    <div class="story">
+                        <div class="story-title">"Third Sister Liu"</div>
+                        <div class="story-desc">
+                            Zhuang song fairy outwitting villains with mountain ballads
+                            <span class="emotion-tag">【Witty Valor】</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="region-tag">
+                    <span>🎵</span>
+                    <span>Rebellious spirit, love through song</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary">
+            <p>
+                From Jiangnan's tender lyricism to the Northwest's heroic epics, from the Northeast's shamanic mysteries
+                to the Southwest's fiery passion, Chinese folktales form a living cultural tapestry. Each land sings its
+                distinctive melody - murmuring like streams, roaring like deserts, whispering like forests, or
+                thundering like mountains. These stories carry ancestral wisdom and emotion, serving as pillars of our
+                spiritual homeland, shaping collective cultural memory through centuries of storytelling.
+            </p>
+        </div>
+
+        <footer>
+            <p>© 2025 Group 10 · MLIS, Universiti Malaya</p>
+            <p>
+                Designed by: ZHANG YUHANG (23115104), ZHAO YIYAO (23107345), ZHOU TIANHUI (23115431), LI KUNWEI
+                (23086384)
+            </p>
+        </footer>
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+        <script>
+            // 初始化地图，设置视图为中国中心
+            const map = L.map('map').setView([35.0, 105.0], 5);
+
+            // 添加OpenStreetMap底图（可选其他瓦片服务）
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // 自定义城市数据
+            const cities = [
+                {
+                    name: '杭州市',
+                    coordinates: [30.2741, 120.1551],
+                    info: `
+                    <h3>《白蛇传》</h3>
+                    <p>人妖殊途的千年情缘，爱情超越生死界限</p>
+                `
+                },
+                {
+                    name: '绍兴市',
+                    coordinates: [29.997117, 120.582112],
+                    info: `
+                    <h3>《梁山伯与祝英台》</h3>
+                    <p>封建礼教下的青春悲歌，化蝶双飞成永恒</p>
+                `
+                },
+                {
+                    name: '西安市',
+                    coordinates: [34.263161, 108.948024],
+                    info: `
+                    <h3>《张骞出使西域》</h3>
+                    <p>凿空万里丝路，一人开启东西文明交融</p>
+                `
+                },
+                {
+                    name: '敦煌市',
+                    coordinates: [40.14211, 94.66159],
+                    info: `
+                    <h3>《敦煌飞天传说》</h3>
+                    <p>石窟壁画中的神女下凡，艺术与信仰完美结合 </p>
+                `
+                },
+                {
+                    name: '长春市',
+                    coordinates: [43.886841, 125.3245],
+                    info: `
+                    <h3>《萨满降魔记》</h3>
+                    <p>通天彻地的神巫大战，人与自然和谐共生</p>
+                `
+                },
+                {
+                    name: '延边朝鲜族自治州',
+                    coordinates: [42.904823, 129.513228],
+                    info: `
+                    <h3>《关东三宝传说》</h3>
+                    <p>人参成精、白狐报恩，黑土地上的神奇物语</p>
+                `
+                },
+                {
+                    name: '石林彝族自治县',
+                    coordinates: [24.75897, 103.27148],
+                    info: `
+                    <h3>《阿诗玛》</h3>
+                    <p>彝族美丽姑娘勇抗恶霸，化身石峰守护家园</p>
+                `
+                },
+                {
+                    name: '柳州市',
+                    coordinates: [24.314617, 109.411703],
+                    info: `
+                    <h3>《刘三姐》</h3>
+                    <p>壮族歌仙巧舌如簧，用山歌智斗财主恶少</p>
+                `
+                }
+            ];
+
+            // 为每个城市添加标记和弹出框
+            cities.forEach(city => {
+                const marker = L.marker(city.coordinates).addTo(map).bindPopup(city.info);
+
+                // 可选：自定义标记图标
+                marker.setIcon(
+                    L.icon({
+                        iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', // 默认标记图标（可替换）
+                        iconSize: [32, 32],
+                        iconAnchor: [16, 32]
+                    })
+                );
+            });
+
+            // 可选：添加中国边界（需要GeoJSON数据）
+            // fetch('china.geojson').then(res => res.json()).then(data => {
+            //     L.geoJSON(data).addTo(map);
+            // });
+        </script>
+    </body>
+</html>

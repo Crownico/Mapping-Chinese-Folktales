@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>中国城市标注 - Leaflet地图</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            #map {
+                height: 100vh;
+                width: 100%;
+            }
+
+            /* 自定义弹出框样式 */
+            .leaflet-popup-content h3 {
+                color: #2c3e50;
+                margin-top: 0;
+            }
+            .leaflet-popup-content p {
+                margin-bottom: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+        <script>
+            // 初始化地图，设置视图为中国中心
+            const map = L.map('map').setView([35.0, 105.0], 5);
+
+            // 添加OpenStreetMap底图（可选其他瓦片服务）
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // 自定义城市数据
+            const cities = [
+                {
+                    name: '杭州市',
+                    coordinates: [30.2741, 120.1551],
+                    info: `
+                    <h3>《白蛇传》</h3>
+                    <p>人妖殊途的千年情缘，爱情超越生死界限</p>
+                `
+                },
+                {
+                    name: '绍兴市',
+                    coordinates: [29.997117, 120.582112],
+                    info: `
+                    <h3>《梁山伯与祝英台》</h3>
+                    <p>封建礼教下的青春悲歌，化蝶双飞成永恒</p>
+                `
+                },
+                {
+                    name: '西安市',
+                    coordinates: [34.263161, 108.948024],
+                    info: `
+                    <h3>《张骞出使西域》</h3>
+                    <p>凿空万里丝路，一人开启东西文明交融</p>
+                `
+                },
+                {
+                    name: '敦煌市',
+                    coordinates: [40.14211, 94.66159],
+                    info: `
+                    <h3>《敦煌飞天传说》</h3>
+                    <p>石窟壁画中的神女下凡，艺术与信仰完美结合 </p>
+                `
+                },
+                {
+                    name: '长春市',
+                    coordinates: [43.886841, 125.3245],
+                    info: `
+                    <h3>《萨满降魔记》</h3>
+                    <p>通天彻地的神巫大战，人与自然和谐共生</p>
+                `
+                },
+                {
+                    name: '延边朝鲜族自治州',
+                    coordinates: [42.904823, 129.513228],
+                    info: `
+                    <h3>《关东三宝传说》</h3>
+                    <p>人参成精、白狐报恩，黑土地上的神奇物语</p>
+                `
+                },
+                {
+                    name: '石林彝族自治县',
+                    coordinates: [24.75897, 103.27148],
+                    info: `
+                    <h3>《阿诗玛》</h3>
+                    <p>彝族美丽姑娘勇抗恶霸，化身石峰守护家园</p>
+                `
+                },
+                {
+                    name: '柳州市',
+                    coordinates: [24.314617, 109.411703],
+                    info: `
+                    <h3>《刘三姐》</h3>
+                    <p>壮族歌仙巧舌如簧，用山歌智斗财主恶少</p>
+                `
+                }
+            ];
+
+            // 为每个城市添加标记和弹出框
+            cities.forEach(city => {
+                const marker = L.marker(city.coordinates).addTo(map).bindPopup(city.info);
+
+                // 可选：自定义标记图标
+                marker.setIcon(
+                    L.icon({
+                        iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', // 默认标记图标（可替换）
+                        iconSize: [32, 32],
+                        iconAnchor: [16, 32]
+                    })
+                );
+            });
+
+            // 可选：添加中国边界（需要GeoJSON数据）
+            // fetch('china.geojson').then(res => res.json()).then(data => {
+            //     L.geoJSON(data).addTo(map);
+            // });
+        </script>
+    </body>
+</html>

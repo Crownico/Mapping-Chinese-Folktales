@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>地域故事页面</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap');
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Noto Serif SC', serif;
+                background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                min-height: 100vh;
+                padding: 20px;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                background: white;
+                border-radius: 20px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+            }
+
+            .header {
+                text-align: center;
+                padding: 40px 20px 30px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                position: relative;
+            }
+
+            .header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+                opacity: 0.3;
+            }
+
+            .main-title {
+                font-size: 36px;
+                font-weight: 700;
+                margin-bottom: 10px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                position: relative;
+                z-index: 1;
+            }
+
+            .subtitle {
+                font-size: 18px;
+                font-style: italic;
+                opacity: 0.9;
+                position: relative;
+                z-index: 1;
+            }
+
+            .regions-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+            }
+
+            .region-card {
+                padding: 30px;
+                position: relative;
+                overflow: hidden;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                border: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .region-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            }
+
+            .region-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                opacity: 0.05;
+                z-index: 0;
+            }
+
+            .jiangnan {
+                background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            }
+
+            .jiangnan::before {
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,60 Q30,50 40,60 T60,60 T80,60" stroke="%234A90E2" stroke-width="2" fill="none" opacity="0.3"/><path d="M10,70 Q20,60 30,70 T50,70 T70,70" stroke="%234A90E2" stroke-width="1.5" fill="none" opacity="0.2"/></svg>');
+            }
+
+            .xibei {
+                background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            }
+
+            .xibei::before {
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="2" fill="%23D4AF37" opacity="0.3"/><circle cx="60" cy="20" r="1.5" fill="%23D4AF37" opacity="0.2"/><circle cx="80" cy="40" r="1" fill="%23D4AF37" opacity="0.3"/><path d="M10,80 L20,70 L30,75 L40,65 L50,70 L60,60 L70,65 L80,55 L90,60" stroke="%23D4AF37" stroke-width="1" fill="none" opacity="0.3"/></svg>');
+            }
+
+            .dongbei {
+                background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            }
+
+            .dongbei::before {
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="20,10 25,20 15,20" fill="%232F5233" opacity="0.2"/><polygon points="40,15 45,25 35,25" fill="%232F5233" opacity="0.3"/><polygon points="60,5 65,15 55,15" fill="%232F5233" opacity="0.2"/><polygon points="80,20 85,30 75,30" fill="%232F5233" opacity="0.3"/></svg>');
+            }
+
+            .xinan {
+                background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            }
+
+            .xinan::before {
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,90 L20,70 L30,80 L40,60 L50,70 L60,50 L70,60 L80,40 L90,50" stroke="%23E74C3C" stroke-width="2" fill="none" opacity="0.3"/><circle cx="30" cy="30" r="8" fill="none" stroke="%23E74C3C" stroke-width="1" opacity="0.2"/></svg>');
+            }
+
+            .region-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px;
+                position: relative;
+                z-index: 1;
+            }
+
+            .region-icon {
+                font-size: 24px;
+                margin-right: 10px;
+            }
+
+            .region-name {
+                font-size: 24px;
+                font-weight: 700;
+                color: #333;
+            }
+
+            .region-desc {
+                font-size: 14px;
+                color: #666;
+                font-style: italic;
+                margin-bottom: 20px;
+                position: relative;
+                z-index: 1;
+            }
+
+            .stories {
+                margin-bottom: 20px;
+                position: relative;
+                z-index: 1;
+            }
+
+            .story {
+                margin-bottom: 15px;
+                padding: 10px 0;
+            }
+
+            .story-title {
+                font-size: 16px;
+                font-weight: 600;
+                color: #333;
+                margin-bottom: 5px;
+            }
+
+            .story-desc {
+                font-size: 14px;
+                color: #555;
+                line-height: 1.4;
+            }
+
+            .emotion-tag {
+                display: inline-block;
+                background: rgba(255, 255, 255, 0.8);
+                padding: 2px 8px;
+                border-radius: 10px;
+                font-size: 12px;
+                color: #666;
+                margin-left: 5px;
+                font-style: italic;
+            }
+
+            .region-tag {
+                background: rgba(255, 255, 255, 0.9);
+                padding: 8px 15px;
+                border-radius: 20px;
+                font-size: 14px;
+                color: #333;
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                position: relative;
+                z-index: 1;
+            }
+
+            .summary {
+                padding: 40px;
+                background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+                text-align: center;
+                border-top: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .summary p {
+                font-size: 16px;
+                line-height: 1.8;
+                color: #444;
+                max-width: 900px;
+                margin: 0 auto;
+            }
+
+            .nav-hint {
+                text-align: center;
+                padding: 20px;
+                background: #f8f9fa;
+                border-top: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .nav-button {
+                display: inline-block;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 25px;
+                text-decoration: none;
+                font-size: 14px;
+                transition: transform 0.3s ease;
+            }
+
+            .nav-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            @media (max-width: 768px) {
+                .regions-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .main-title {
+                    font-size: 28px;
+                }
+
+                .region-card {
+                    padding: 20px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+        
+
+            <div class="regions-grid">
+                <div class="region-card jiangnan">
+                    <div class="region-header">
+                        <span class="region-icon">🌊</span>
+                        <h2 class="region-name">江南水乡</h2>
+                    </div>
+                    <p class="region-desc">小桥流水人家，温婉如玉的故事摇篮</p>
+
+                    <div class="stories">
+                        <div class="story">
+                            <div class="story-title">《白蛇传》</div>
+                            <div class="story-desc">
+                                人妖殊途的千年情缘，爱情超越生死界限
+                                <span class="emotion-tag">【至死不渝】</span>
+                            </div>
+                        </div>
+                        <div class="story">
+                            <div class="story-title">《梁山伯与祝英台》</div>
+                            <div class="story-desc">
+                                封建礼教下的青春悲歌，化蝶双飞成永恒
+                                <span class="emotion-tag">【生死相随】</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-tag">
+                        <span>🏮</span>
+                        <span>缠绵悱恻，重情重义</span>
+                    </div>
+                </div>
+
+                <div class="region-card xibei">
+                    <div class="region-header">
+                        <span class="region-icon">🐪</span>
+                        <h2 class="region-name">西北大漠</h2>
+                    </div>
+                    <p class="region-desc">丝路驼铃声声，英雄豪情万丈</p>
+
+                    <div class="stories">
+                        <div class="story">
+                            <div class="story-title">《张骞出使西域》</div>
+                            <div class="story-desc">
+                                凿空万里丝路，一人开启东西文明交融
+                                <span class="emotion-tag">【开拓进取】</span>
+                            </div>
+                        </div>
+                        <div class="story">
+                            <div class="story-title">《敦煌飞天传说》</div>
+                            <div class="story-desc">
+                                石窟壁画中的神女下凡，艺术与信仰完美结合
+                                <span class="emotion-tag">【神圣庄严】</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-tag">
+                        <span>⚔️</span>
+                        <span>豪迈壮阔，文化交融</span>
+                    </div>
+                </div>
+
+                <div class="region-card dongbei">
+                    <div class="region-header">
+                        <span class="region-icon">🌲</span>
+                        <h2 class="region-name">东北黑土地</h2>
+                    </div>
+                    <p class="region-desc">白山黑水间，自然神灵与人间烟火</p>
+
+                    <div class="stories">
+                        <div class="story">
+                            <div class="story-title">《萨满降魔记》</div>
+                            <div class="story-desc">
+                                通天彻地的神巫大战，人与自然和谐共生
+                                <span class="emotion-tag">【神秘莫测】</span>
+                            </div>
+                        </div>
+                        <div class="story">
+                            <div class="story-title">《关东三宝传说》</div>
+                            <div class="story-desc">
+                                人参成精、白狐报恩，黑土地上的神奇物语
+                                <span class="emotion-tag">【奇幻瑰丽】</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-tag">
+                        <span>🌿</span>
+                        <span>神秘粗犷，自然崇拜</span>
+                    </div>
+                </div>
+
+                <div class="region-card xinan">
+                    <div class="region-header">
+                        <span class="region-icon">🏔️</span>
+                        <h2 class="region-name">西南山地</h2>
+                    </div>
+                    <p class="region-desc">千山万水隔不断，民族风情永流传</p>
+
+                    <div class="stories">
+                        <div class="story">
+                            <div class="story-title">《阿诗玛》</div>
+                            <div class="story-desc">
+                                彝族美丽姑娘勇抗恶霸，化身石峰守护家园
+                                <span class="emotion-tag">【不屈不挠】</span>
+                            </div>
+                        </div>
+                        <div class="story">
+                            <div class="story-title">《刘三姐》</div>
+                            <div class="story-desc">
+                                壮族歌仙巧舌如簧，用山歌智斗财主恶少
+                                <span class="emotion-tag">【机智勇敢】</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-tag">
+                        <span>🎵</span>
+                        <span>反抗精神，歌舞传情</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary">
+                <p>
+                    从江南的柔情似水到西北的豪迈如风，从东北的神秘莫测到西南的热情奔放，中国民间故事如同一幅流动的文化长卷。每一片土地都有属于自己的声音——或低吟浅唱，或高歌猛进，或神秘呢喃，或激昂澎湃。这些故事不仅承载着先辈的智慧与情感，更是中华民族精神家园的重要支柱，在千百年的传承中塑造着我们共同的文化记忆。
+                </p>
+            </div>
+
+            <div class="nav-hint">
+                <a href="#" class="nav-button">下一页：故事主题分类 →</a>
+            </div>
+        </div>
+    </body>
+</html>
