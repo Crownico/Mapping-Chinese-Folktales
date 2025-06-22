@@ -8,9 +8,30 @@
             href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap"
             rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+        <script src="https://unpkg.com/@antv/g2plot@2.4.16/dist/g2plot.min.js"></script>
 
         <link rel="stylesheet" href="css/index.css" />
         <link rel="stylesheet" href="css/theme.css" />
+        <style>
+            .custom-tooltip {
+                /* background: rgba(255, 255, 255, 0.98) !important; */
+                border-radius: 4px !important;
+                /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important; */
+                padding: 12px !important;
+                /* border: 1px solid #eee !important; */
+                min-width: 200px;
+            }
+            .custom-tooltip-title {
+                font-weight: bold;
+                margin-bottom: 8px;
+                color: #8b0000;
+                font-size: 16px;
+            }
+            .custom-tooltip-content {
+                color: #666;
+                font-size: 14px;
+            }
+        </style>
     </head>
 
     <body>
@@ -35,13 +56,24 @@
 
             <div class="chart-section">
                 <div class="chart-container">
-                    
-                    <div class="chart-wrapper">
-                        <canvas id="storyChart" class="chart-canvas"></canvas>
+                    <div class="chart">
+                        <div class="chart-wrapper">
+                            <canvas id="storyChart" class="chart-canvas"></canvas>
+                        </div>
+                        <div class="chart-header" style="margin-top: 40px">
+                            <h2 class="chart-title">Distribution of folklore types</h2>
+                            <p class="chart-subtitle">Based on statistical analysis of traditional literature</p>
+                        </div>
                     </div>
-                    <div class="chart-header" style="margin-top: 40px;">
-                        <h2 class="chart-title">Distribution of folklore types</h2>
-                        <p class="chart-subtitle">Based on statistical analysis of traditional literature</p>
+                    <div class="chart">
+                        <div class="chart-wrapper">
+                            <!-- <canvas id="storyChart" class="chart-canvas"></canvas> -->
+                            <div id="container"></div>
+                        </div>
+                        <div class="chart-header" style="margin-top: 40px">
+                            <h2 class="chart-title">Folk Tale Keywords</h2>
+                            <p class="chart-subtitle" style=""> &nbsp; </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -249,6 +281,47 @@
                         <span class="characteristic-tag">Profound philosophy</span>
                     </div>
                 </div>
+
+                <div class="story-type-card moral">
+                    <div class="card-header">
+                        <div class="type-info">
+                            <div class="type-icon history">史</div>
+                            <div class="type-name-section">
+                                <h3>Historical Tales</h3>
+                                <span class="type-category">History·Turning Points</span>
+                            </div>
+                        </div>
+                        <div class="percentage-badge">15%</div>
+                    </div>
+
+                    <p class="card-description">
+                        Stories based on real historical figures, events, and timelines. They are often adapted into
+                        literary or folk forms to emphasize loyalty, wisdom, patriotism, and pivotal moments in Chinese
+                        history. These tales foster historical understanding and cultural pride.
+                    </p>
+
+                    <div class="examples-section">
+                        <h4 class="examples-title">📚 Classic Masterpieces</h4>
+                        <div class="example-item">
+                            <span class="example-name">Yue Fei Resists the Jin</span>
+                            <span class="example-origin">The Story of Yue Fei</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-name">Zhuge Liang Outsmarts Sima Yi</span>
+                            <span class="example-origin">Romance of the Three Kingdoms</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-name">Song of Righteousness</span>
+                            <span class="example-origin">Wen Tianxiang's Historical Record</span>
+                        </div>
+                    </div>
+
+                    <div class="characteristics">
+                        <span class="characteristic-tag">Historical accuracy</span>
+                        <span class="characteristic-tag">Heroic loyalty</span>
+                        <span class="characteristic-tag">Epic narrative</span>
+                    </div>
+                </div>
             </div>
 
             <section class="insights-section">
@@ -291,8 +364,8 @@
                         labels: ['Mythological Stories', 'Heroic Legends', 'Fantasy Tales', 'Life Stories', 'Fables'],
                         datasets: [
                             {
-                                data: [35, 25, 20, 15, 5],
-                                backgroundColor: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7'],
+                                data: [25, 20, 20, 15, 5, 15],
+                                backgroundColor: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#5f503c'],
                                 borderColor: '#ffffff',
                                 borderWidth: 3,
                                 hoverOffset: 15
@@ -349,6 +422,95 @@
                     });
                 });
             });
+        </script>
+
+        <script>
+            const data = [
+                { word: 'Pangu', weight: 60, desc: 'The creator god who separated heaven and earth' },
+                { word: 'Nuwa', weight: 55, desc: 'The goddess who created humans and mended the sky' },
+                { word: 'Fuxi', weight: 50, desc: 'Cultural ancestor who invented the Eight Trigrams' },
+                { word: 'Heaven', weight: 45, desc: 'The celestial realm in traditional Chinese cosmology' },
+                { word: 'Creation', weight: 45, desc: 'The origin of the universe in Chinese mythology' },
+                { word: 'Flood', weight: 40, desc: 'The great deluge controlled by Yu the Great' },
+                { word: 'Dragon', weight: 40, desc: 'The totemic symbol of the Chinese nation' },
+                { word: 'Immortals', weight: 38, desc: 'Transcendent beings in Taoist mythology' },
+                { word: 'Mulan', weight: 38, desc: "The legendary heroine who took her father's place in war" },
+                { word: 'Yue Fei', weight: 38, desc: 'National hero known for his loyalty to the Song dynasty' },
+                { word: 'Loyalty', weight: 35, desc: 'A core virtue in traditional Chinese ethics' },
+                { word: 'Bravery', weight: 35, desc: 'The quality displayed by legendary heroes' },
+                { word: 'Rebellion', weight: 35, desc: "Defiance against authority, like Monkey King's revolt" },
+                { word: 'General', weight: 32, desc: 'Military leader in ancient Chinese hierarchy' },
+                { word: 'Dynasty', weight: 32, desc: 'Imperial ruling periods in Chinese history' },
+                { word: 'Sacrifice', weight: 32, desc: 'Self-devotion for higher ideals' },
+                { word: 'Fox Spirit', weight: 30, desc: 'Shape-shifting creatures in Chinese folklore' },
+                { word: 'White Snake', weight: 30, desc: 'Legendary serpent spirit from "Legend of the White Snake"' },
+                { word: 'Magic', weight: 28, desc: 'Supernatural powers in mythological tales' },
+                { word: 'Reincarnation', weight: 28, desc: 'The Buddhist concept of cyclic rebirth' },
+                { word: 'Dream', weight: 25, desc: "Zhuangzi's famous butterfly dream paradox" },
+                { word: 'Transformation', weight: 25, desc: "Shape-shifting ability like Monkey King's 72 changes" },
+                { word: 'Immortality', weight: 25, desc: 'The ultimate goal of Taoist alchemy' },
+                { word: 'Spirit Realm', weight: 25, desc: 'The supernatural dimension in Chinese belief' },
+                { word: 'Filial Piety', weight: 22, desc: 'Reverence for parents, a Confucian cornerstone' },
+                { word: 'Wisdom', weight: 22, desc: 'Embodied by figures like Zhuge Liang' },
+                { word: 'Honesty', weight: 20, desc: 'Fundamental moral value in Chinese culture' },
+                { word: 'Kindness', weight: 20, desc: 'Virtue celebrated in folk stories' },
+                { word: 'Village', weight: 18, desc: 'Basic social unit in traditional society' },
+                { word: 'Farmer', weight: 18, desc: "Foundation of China's agrarian civilization" },
+                { word: 'Market', weight: 18, desc: 'Traditional commercial centers' },
+                { word: 'Monkey King', weight: 35, desc: 'The rebellious protagonist of "Journey to the West"' },
+                { word: 'Trickster', weight: 20, desc: 'Mischievous characters in folk narratives' },
+                { word: 'Talking Animals', weight: 22, desc: 'Common motif in mythological stories' },
+                { word: 'Karma', weight: 20, desc: 'The Buddhist law of cause and effect' },
+                { word: 'Moral', weight: 18, desc: 'Behavioral norms in traditional society' },
+                { word: 'Greed', weight: 18, desc: 'A recurring human flaw in cautionary tales' },
+                { word: 'Cleverness', weight: 18, desc: 'Wisdom exemplified by characters like Afanti' }
+            ];
+            const wordCloud = new G2Plot.WordCloud('container', {
+                data,
+                wordField: 'word',
+                weightField: 'weight',
+                colorField: 'word',
+                wordStyle: {
+                    // fontFamily: 'SimSun',
+                    fontSize: [12, 60],
+                    rotation: [0, 90], // 0-90度随机旋转
+                    padding: 2
+                },
+                random: () => 0.5, // 固定随机种子使布局稳定
+                tooltip: {
+                    showTitle: false,
+                    showMarkers: false,
+                    customContent: (title, items) => {
+                        // 关键修正点：正确的数据访问路径
+                        const data = items[0]?.data?.datum || items[0]?.data;
+                        if (!data) return '';
+
+                        // 使用普通div而不是g2-tooltip类，避免被覆盖
+                        return `
+                        <div class="custom-tooltip">
+                            <div class="custom-tooltip-title">${data.word}</div>
+                            <div class="custom-tooltip-content">${data.desc}</div>
+                        </div>
+                    `;
+                    }
+                },
+                interactions: [{ type: 'element-active' }],
+                state: {
+                    active: {
+                        style: {
+                            fillOpacity: 0.8,
+                            lineWidth: 2,
+                            stroke: '#333'
+                        }
+                    }
+                },
+                spiral: 'rectangular', // 布局方式
+                shuffle: false,
+                color: ['#8b0000', '#8f4b38', '#a98175', '#b36d61', '#556fb5', '#426ab3', '#2e9577']
+            });
+
+            // 渲染图表
+            wordCloud.render();
         </script>
     </body>
 </html>

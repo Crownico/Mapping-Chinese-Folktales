@@ -7,6 +7,11 @@
     padding: 40px;
     /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); */
     /* border: 1px solid #e8ecef; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10vw;
 }
 
 .chart-header {
@@ -58,6 +63,8 @@
 
 .chart-wrapper {
     width: 100%;
+    min-width: 400px;
+    /* aspect-ratio: 1/1; */
     position: relative;
     display: flex;
     justify-content: center;
@@ -163,6 +170,9 @@
 }
 .type-icon.moral {
     background: linear-gradient(135deg, #ffeaa7, #ffca28);
+}
+.type-icon.history {
+    background: linear-gradient(135deg, #8e7959, #5f503c);
 }
 
 .type-name-section h3 {

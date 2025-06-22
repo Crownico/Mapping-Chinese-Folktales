@@ -7,8 +7,15 @@
         <link
             href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap"
             rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script> -->
+        <link href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css" rel="stylesheet" />
+        <script src="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.js"></script>
+        <style>
+            .gantt-container {
+                width: 100%;
+                height: 500px;
+            }
+        </style>
         <link rel="stylesheet" href="css/index.css" />
         <link rel="stylesheet" href="css/about.css" />
     </head>
@@ -33,27 +40,33 @@
 
         <main>
             <section>
-                <h2>Project Background</h2>
+                <h2>🎯 Project Background</h2>
                 <p>
-                    This project aims to present the geographical distribution, thematic classification and cultural
-                    connotation of Chinese folk tales in a digital humanistic way. Through the collation and digital
-                    expression of classic legends and regional characteristic stories, we hope to reconstruct the
-                    transmission path of China's oral tradition in the digital space and promote the visual inheritance
-                    of culture.
+                    This project explores the geographic distribution, thematic categories, and cultural meanings of
+                    Chinese folk tales through a digital humanities lens. By curating and digitally representing classic
+                    legends and region-specific stories, we aim to reconstruct the oral transmission paths of Chinese
+                    folklore in the digital space and promote its visual cultural heritage.
                 </p>
             </section>
 
             <section>
-                <h2>Design Concept</h2>
+                <h2>🎨 Design Concept</h2>
                 <p>
-                    The overall page takes "ancient rhyme and new presentation" as the aesthetic core, integrating ink
-                    elements and modern responsive design language. Through map visualization, interactive timelines,
-                    and topic card classification, we encourage users to interpret the social value, emotional
-                    projection, and cultural identity behind the story from different perspectives.
+                    Guided by the aesthetic theme of "ancient charm, modern expression", the site blends ink-style
+                    motifs with responsive web design. Through map-based visualization, interactive timelines, and story
+                    categorization, we invite users to interpret the social functions, emotional narratives, and
+                    identity values embedded in each tale.
                 </p>
             </section>
-
             <section>
+                <h2>👥 Team Involvement</h2>
+                <p>
+                    We developed an interactive visualization to track the team's participation and contributions
+                    throughout the project timeline.
+                </p>
+                <div id="gantt_container" class="gantt-container"></div>
+            </section>
+            <!-- <section>
                 <h2>Team involvement</h2>
                 <p>
                     We developed a visualization to show how engaged and how much time each team member is involved in
@@ -65,9 +78,9 @@
                     width="700"
                     height="400"
                     style="max-width: 100%; margin: 30px auto; display: block"></canvas>
-            </section>
+            </section> -->
 
-            <section>
+            <!-- <section>
                 <h2>Page navigation</h2>
                 <div class="nav-links">
                     <a href="index.html">🏠 Home</a>
@@ -75,16 +88,86 @@
                     <a href="themes.html">📚 Themes</a>
                     <a href="landmark-tales.html">🌟 Landmark Tales</a>
                 </div>
+            </section> -->
+
+            <section>
+                <h2>📚 Data Sources</h2>
+
+                <ul style="margin-left: 30px">
+                    <li class="item" style="margin-bottom: 10px">
+                        <h3>Chinese Folk Culture Web · Folk Tale Section</h3>
+                        <p>http://www.zgwhw.com/news/mjgs/</p>
+                        <p>
+                            A rich collection of folk tales from across China, including regional legends, romantic
+                            myths, and supernatural figures.
+                        </p>
+                    </li>
+                    <li class="item" style="margin-bottom: 10px">
+                        <h3>Shidian Guji (Ancient Texts Platform)</h3>
+                        <p>https://www.shidianguji.com/</p>
+                        <p>
+                            Jointly developed by Peking University and ByteDance, this platform provides full-text
+                            search and high-quality scans of ancient manuscripts for textual verification and research.
+                        </p>
+                    </li>
+
+                    <li class="item" style="margin-bottom: 10px">
+                        <h3>Shuge (Digital Book Pavilion)</h3>
+                        <p>https://shuge.org/</p>
+                        <p>
+                            An open-access digital library offering a wide collection of public-domain Chinese classics
+                            and ancient texts.
+                        </p>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>🌐 Recommended Links</h2>
+
+                <ul style="margin-left: 30px">
+                    <li class="item" style="margin-bottom: 10px">
+                        <h3>Chinese Text Project</h3>
+                        <p>http://ctext.org</p>
+                        <p>
+                            A bilingual digital library of classical Chinese literature, covering texts from the pre-Qin
+                            to Song dynasties, with English translations and full-text search.
+                        </p>
+                    </li>
+                    <li class="item" style="margin-bottom: 10px">
+                        <h3>World Digital Library</h3>
+                        <p>https://www.wdl.org</p>
+                        <p>
+                            A global UNESCO initiative providing high-resolution access to historical documents, books,
+                            and maps from different cultures.
+                        </p>
+                    </li>
+
+                    <li class="item" style="margin-bottom: 10px">
+                        <h3>Global Memory Net</h3>
+                        <p>http://memorynet.net/</p>
+                        <p>
+                            A multimedia archive of global cultural heritage, including manuscripts, costumes, and folk
+                            culture images.
+                        </p>
+                    </li>
+                    <li class="item" style="margin-bottom: 10px">
+                        <h3>International Dunhuang Project</h3>
+                        <p>https://idp.bl.uk/</p>
+                        <p>
+                            An international collaboration led by the British Library, offering digitized Dunhuang
+                            manuscripts, murals, and artifacts. -->
+                        </p>
+                    </li>
+                </ul>
             </section>
 
             <section>
-                <h2>Acknowledgments and Statements</h2>
+                <h2>📜 Acknowledgment</h2>
                 <p>
-                    This project is the result of the team effort of the University of Malaya's Postgraduate Programme
-                    in Library and Information Science, Introduction to Digital Humanities, and all photographs and
-                    texts are for learning and presentation purposes. If there is any infringement, please contact us to
-                    remove it. Special thanks to the instructors and supporters of the materials for their valuable
-                    guidance and assistance.
+                    This project is produced by Group 10 from the Master of Library and Information Science program at
+                    Universiti Malaya, as part of the Introduction to Digital Humanities course. All content is for
+                    educational and presentation purposes only. If any material infringes on rights, please contact us
+                    for removal.
                 </p>
             </section>
         </main>
@@ -96,7 +179,7 @@
                 (23086384)
             </p>
         </footer>
-        <script>
+        <!-- <script>
             const ctx = document.getElementById('contributionChart').getContext('2d');
             const chart = new Chart(ctx, {
                 type: 'bar',
@@ -135,6 +218,21 @@
                         }
                     }
                 }
+            });
+        </script> -->
+        <script>
+            gantt.init('gantt_container');
+            gantt.parse({
+                data: [
+                    { id: 1, text: '项目开发', start_date: '2023-01-01', duration: 30, progress: 0.4, open: true },
+                    { id: 2, text: '需求分析', start_date: '2023-01-01', duration: 7, parent: 1, progress: 1 },
+                    { id: 3, text: 'UI设计', start_date: '2023-01-08', duration: 7, parent: 1, progress: 0.8 },
+                    { id: 4, text: '开发', start_date: '2023-01-15', duration: 30, parent: 1, progress: 0.2 }
+                ],
+                links: [
+                    { id: 1, source: 2, target: 3, type: '0' },
+                    { id: 2, source: 3, target: 4, type: '0' }
+                ]
             });
         </script>
     </body>

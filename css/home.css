@@ -3,6 +3,7 @@
     padding: 3rem 2rem;
 }
 .why-section .wrapper {
+    min-height: 50vh;
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
@@ -12,17 +13,19 @@
     gap: 2rem;
 }
 .why-text {
-    flex: 1 1 300px;
+    flex: 2;
+    /* flex: 1 1 300px; */
     max-width: 600px;
 }
 .why-img {
     text-align: center;
-    flex: 1 1 300px;
-    max-width: 500px;
+    flex: 3;
+    /* flex: 1 1 300px;
+    max-width: 500px; */
 }
 .why-img img {
     width: 100%;
-    max-width: 400px;
+    /* max-width: 600px; */
     height: auto;
     border-radius: 8px;
 }
