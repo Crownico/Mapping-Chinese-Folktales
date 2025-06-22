@@ -10,14 +10,22 @@
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script> -->
         <link href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css" rel="stylesheet" />
         <script src="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.js"></script>
-        <style>
-            .gantt-container {
-                width: 100%;
-                height: 500px;
-            }
-        </style>
+
         <link rel="stylesheet" href="css/index.css" />
         <link rel="stylesheet" href="css/about.css" />
+        <style>
+            .gantt-container {
+                margin: 30px auto;
+                width: 100%;
+                height: 250px;
+            }
+            section a {
+                text-decoration: none;
+            }
+            section a:hover {
+                text-decoration: underline;
+            }
+        </style>
     </head>
 
     <body>
@@ -96,7 +104,7 @@
                 <ul style="margin-left: 30px">
                     <li class="item" style="margin-bottom: 10px">
                         <h3>Chinese Folk Culture Web · Folk Tale Section</h3>
-                        <p>http://www.zgwhw.com/news/mjgs/</p>
+                        <a href="http://www.zgwhw.com/news/mjgs/">http://www.zgwhw.com/news/mjgs/</a>
                         <p>
                             A rich collection of folk tales from across China, including regional legends, romantic
                             myths, and supernatural figures.
@@ -104,7 +112,7 @@
                     </li>
                     <li class="item" style="margin-bottom: 10px">
                         <h3>Shidian Guji (Ancient Texts Platform)</h3>
-                        <p>https://www.shidianguji.com/</p>
+                        <a href="https://www.shidianguji.com/">https://www.shidianguji.com/</a>
                         <p>
                             Jointly developed by Peking University and ByteDance, this platform provides full-text
                             search and high-quality scans of ancient manuscripts for textual verification and research.
@@ -113,7 +121,7 @@
 
                     <li class="item" style="margin-bottom: 10px">
                         <h3>Shuge (Digital Book Pavilion)</h3>
-                        <p>https://shuge.org/</p>
+                        <a href="https://shuge.org/">https://shuge.org/</a>
                         <p>
                             An open-access digital library offering a wide collection of public-domain Chinese classics
                             and ancient texts.
@@ -127,7 +135,7 @@
                 <ul style="margin-left: 30px">
                     <li class="item" style="margin-bottom: 10px">
                         <h3>Chinese Text Project</h3>
-                        <p>http://ctext.org</p>
+                        <a href="http://ctext.org/">http://ctext.org</a>
                         <p>
                             A bilingual digital library of classical Chinese literature, covering texts from the pre-Qin
                             to Song dynasties, with English translations and full-text search.
@@ -135,7 +143,7 @@
                     </li>
                     <li class="item" style="margin-bottom: 10px">
                         <h3>World Digital Library</h3>
-                        <p>https://www.wdl.org</p>
+                        <a href="https://www.wdl.org/">https://www.wdl.org</a>
                         <p>
                             A global UNESCO initiative providing high-resolution access to historical documents, books,
                             and maps from different cultures.
@@ -144,7 +152,7 @@
 
                     <li class="item" style="margin-bottom: 10px">
                         <h3>Global Memory Net</h3>
-                        <p>http://memorynet.net/</p>
+                        <a href="http://memorynet.net/">http://memorynet.net/</a>
                         <p>
                             A multimedia archive of global cultural heritage, including manuscripts, costumes, and folk
                             culture images.
@@ -152,10 +160,10 @@
                     </li>
                     <li class="item" style="margin-bottom: 10px">
                         <h3>International Dunhuang Project</h3>
-                        <p>https://idp.bl.uk/</p>
+                        <a href="https://idp.bl.uk/">https://idp.bl.uk/</a>
                         <p>
                             An international collaboration led by the British Library, offering digitized Dunhuang
-                            manuscripts, murals, and artifacts. -->
+                            manuscripts, murals, and artifacts.
                         </p>
                     </li>
                 </ul>
@@ -222,18 +230,126 @@
         </script> -->
         <script>
             gantt.init('gantt_container');
+
+            // 配置日期显示格式
+            // gantt.config.date_format = '%Y-%m-%d';
+
+            // 配置时间刻度
+            gantt.config.scale_unit = 'week';
+            gantt.config.step = 1;
+            // gantt.config.subscales = [{ unit: 'day', step: 1, date: '%j %D' }];
+
+            // 配置任务表格文本显示
+            gantt.config.columns = [
+                { name: 'text', label: 'Task name', tree: true, width: 150 },
+                // { name: 'start_date', label: '开始时间', align: 'center', width: 80 },
+                // { name: 'end_date', label: '结束时间', align: 'center', width: 80 },
+                { name: 'persons', label: 'Persons', width: 150 }
+                // { name: 'description', label: '描述', width: 200 }
+            ];
+
+            // 启用自动调整
+            // gantt.config.autosize = 'xy';
+            // // 响应式调整
+            // window.addEventListener('resize', function () {
+            //     gantt.autoSchedule();
+            //     gantt.render();
+            // });
+
+            // 设置任务条上展示的内容，参数task会返回当前任务的数据
+            gantt.templates.task_text = function (start, end, task) {
+                // return task.text + ' - ' + task.persons;
+                return '';
+            };
+            gantt.plugins({
+                tooltip: true
+            });
+
             gantt.parse({
                 data: [
-                    { id: 1, text: '项目开发', start_date: '2023-01-01', duration: 30, progress: 0.4, open: true },
-                    { id: 2, text: '需求分析', start_date: '2023-01-01', duration: 7, parent: 1, progress: 1 },
-                    { id: 3, text: 'UI设计', start_date: '2023-01-08', duration: 7, parent: 1, progress: 0.8 },
-                    { id: 4, text: '开发', start_date: '2023-01-15', duration: 30, parent: 1, progress: 0.2 }
+                    {
+                        id: 1,
+                        text: 'Story Collection',
+                        start_date: '26-05-2025', // Week 10
+                        end_date: '01-06-2025', // Week 10
+                        persons: 'ZHOU TIANHUI, LI KUNWEI',
+                        description: 'Collecting and organizing stories',
+                        progress: 0
+                    },
+                    {
+                        id: 2,
+                        text: 'Website Design',
+                        start_date: '02-06-2025', // Week 11
+                        end_date: '08-06-2025', // Week 11
+                        persons: 'All Members',
+                        description: 'Designing site layout and structure',
+                        progress: 0
+                    },
+                    {
+                        id: 3,
+                        text: 'Theme Categorization',
+                        start_date: '09-06-2025', // Week 12
+                        end_date: '15-06-2025', // Week 12
+                        persons: 'ZHAO YIYAO, ZHANG YUHANG',
+                        description: 'Categorizing stories into themes',
+                        progress: 0
+                    },
+                    {
+                        id: 4,
+                        text: 'Website Development',
+                        start_date: '16-06-2025', // Week 13
+                        end_date: '22-06-2025', // Week 13
+                        persons: 'All Members',
+                        description: 'Building and refining the website',
+                        progress: 0
+                    },
+                    {
+                        id: 5,
+                        text: 'QA & Submission',
+                        start_date: '23-06-2025', // Week 14
+                        end_date: '29-06-2025', // Week 14
+                        persons: 'All Members',
+                        description: 'Final quality check and submission',
+                        progress: 0
+                    }
                 ],
                 links: [
-                    { id: 1, source: 2, target: 3, type: '0' },
-                    { id: 2, source: 3, target: 4, type: '0' }
+                    { id: 1, source: 1, target: 2, type: gantt.config.links.finish_to_start },
+                    { id: 2, source: 2, target: 3, type: gantt.config.links.finish_to_start },
+                    { id: 3, source: 3, target: 4, type: gantt.config.links.finish_to_start },
+                    { id: 4, source: 4, target: 5, type: gantt.config.links.finish_to_start }
                 ]
             });
+
+            function showTaskTooltip(event, domElement, key) {
+                let targetTaskId = gantt.locate(event);
+
+                if (gantt.isTaskExists(targetTaskId)) {
+                    const task = gantt.getTask(targetTaskId);
+                    return gantt.templates.tooltip_text(task.start_date, task.end_date, task);
+                }
+            }
+            gantt.ext.tooltips.tooltipFor({
+                selector: '.gantt_row',
+                html: function (event, domElement) {
+                    return showTaskTooltip(event, domElement, 'grid');
+                }
+            });
+
+            // // 禁用任务条链接拖动功能
+            gantt.config.drag_links = false;
+            // // 禁用任务条左右边缘拉动功能
+            gantt.config.drag_resize = false;
+            // // 禁用任务条长按移动功能
+            gantt.config.drag_move = false;
+            // // 禁用任务条拖动进度条功能
+            gantt.config.drag_progress = false;
+            // // 设置甘特图滚动条的大小为25px
+            // gantt.config.scroll_size = 25;
+            // // 开启表格排序功能
+            // gantt.config.sort = true;
+            // // 渲染发生错误时不显示默认的错误弹框
+            gantt.config.show_errors = false;
         </script>
     </body>
 </html>

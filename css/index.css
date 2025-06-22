@@ -18,6 +18,21 @@
     --primary-color-700: #8e7959;
     --primary-color-800: #5f503c;
     --primary-color-900: #2f281e;
+
+    /* dhx 甘特图基础色变量 */
+    --dhx-gantt-base-colors-white: #ffffff;
+    --dhx-gantt-base-colors-select: #eff3ff;
+    --dhx-gantt-base-colors-hover-color: #e0e0e0;
+    --dhx-gantt-base-colors-border-light: #f0f0f0;
+    --dhx-gantt-base-colors-border: #dfe0e1;
+    --dhx-gantt-base-colors-icons: #a1a4a6;
+
+    --dhx-gantt-base-colors-text-light: #555d63;
+    --dhx-gantt-base-colors-text-base: #23272a;
+    --dhx-gantt-base-colors-text-on-fill: rgba(255, 255, 255, 0.9);
+    --dhx-gantt-base-colors-background: #ffffff;
+    --dhx-gantt-base-colors-background-alt: #f2f2f2;
+    --dhx-gantt-base-colors-primary: #537cfa;
 }
 body {
     font-family: 'Noto Serif SC', serif;
